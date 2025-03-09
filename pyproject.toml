@@ -1,0 +1,24 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Felix Suarez"}
+]
+readme = "README.md"
+requires-python = ">=3.12.0,<4.0"
+dependencies = [
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "langgraph (>=0.3.5,<0.4.0)",
+    "google-cloud-aiplatform (>=1.83)",
+    "langgraph-cli[inmem] (>=0.1.75,<0.2.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+

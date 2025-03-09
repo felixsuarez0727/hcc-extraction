@@ -1,0 +1,10 @@
+*/.env
+*.pytest_cache
+*.langgraph_api
+
+*patient_result*
+*.pyc
+*.db
+*.env
+
+credentials.json
