@@ -1,4 +1,4 @@
-from src.langgraph.prompts.extraction_prompts import EXTRACTION_PROMPTS
+from src.agents.medical_conditions_agent.prompts.extraction_prompts import EXTRACTION_PROMPTS
 
 
 def test_prompts_keys():

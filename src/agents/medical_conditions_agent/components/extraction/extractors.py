@@ -1,10 +1,12 @@
-import json
 import logging
 import time
 import re
 from typing import Any
 
-from vertexai.generative_models import GenerativeModel
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.prompts import PromptTemplate
+from langchain.output_parsers import StructuredOutputParser, ResponseSchema
+
 from src.agents.medical_conditions_agent.prompts.extraction_prompts import (
     EXTRACTION_PROMPTS,
 )
@@ -39,27 +41,81 @@ class RegexExtractor(BaseExtractor):
         return clinical_note
 
 
-class AIExtractor(BaseExtractor):
-    """Base class for AI-powered extractors."""
+class AIPatientInformationExtractor(BaseExtractor):
+    """AI-based extractor to obtain Patient Information"""
 
-    def __init__(self, prompt_key: str, output_type: str = "json"):
-        self.model = GenerativeModel(model_name="gemini-1.5-flash")
+    def __init__(self, prompt_key: str):
+        self.llm = ChatGoogleGenerativeAI(
+            model="gemini-1.5-flash",
+            temperature=0,
+            max_tokens=None,
+            timeout=None,
+            max_retries=2,
+        )
         self.prompt_key = prompt_key
-        self.output_type = output_type
 
-    def extract(self, clinical_note: str) -> Any:
-        """Extract information using AI."""
+        self.output_parser = StructuredOutputParser.from_response_schemas([
+            ResponseSchema(name="name", description="Patient's name"),
+            ResponseSchema(name="age", description="Patient's age"),
+            ResponseSchema(name="dob", description="Patient's date of birth"),
+            ResponseSchema(name="insurance_number", description="Patient's insurance number")
+        ])
+
+    def extract(self, clinical_note: str) -> any:
+        """Extract information using AI with a structured prompt"""
         logger.info(f"Starting AI extraction for {self.prompt_key}")
         time.sleep(0.3)
 
-        prompt = f"{EXTRACTION_PROMPTS.get(self.prompt_key)} {clinical_note}"
-        response = self.model.generate_content(prompt)
-        text_response = response.text.strip()
+        prompt = PromptTemplate(
+            input_variables=["clinical_note"],
+            template=f"{EXTRACTION_PROMPTS.get("patient_information_prompt")} {{clinical_note}}"
+        ).format(clinical_note=clinical_note)
 
-        if self.output_type == "json":
-            try:
-                return json.loads(text_response)
-            except json.JSONDecodeError as e:
-                logger.error(f"Error decoding JSON response: {e}")
-                raise
-        return text_response
+        response = self.llm.predict(prompt)
+        result = self.output_parser.parse(response)
+        try:
+            return result
+        except Exception as e:
+            logger.error(f"Error parsing output: {e}")
+            raise
+
+
+
+class AIMedicalConditionsExtractor(BaseExtractor):
+    """AI-based extractor to obtain Medical Conditions"""
+
+    def __init__(self, prompt_key: str):
+        self.llm = ChatGoogleGenerativeAI(
+            model="gemini-1.5-flash",
+            temperature=0,
+            max_tokens=None,
+            timeout=None,
+            max_retries=2,
+        )
+        self.prompt_key = prompt_key
+
+        self.output_parser = StructuredOutputParser.from_response_schemas([
+            ResponseSchema(name="medical_conditions", description="List of medical conditions and codes", type="array", items=[
+                ResponseSchema(name="condition", description="Medical condition description", type="string"),
+                ResponseSchema(name="code", description="Medical condition code", type="string")
+            ])
+        ])
+
+    def extract(self, clinical_note: str) -> any:
+        """Extract information using AI with a structured prompt"""
+        logger.info(f"Starting AI extraction for {self.prompt_key}")
+        time.sleep(0.3)
+
+        prompt = PromptTemplate(
+            input_variables=["clinical_note"],
+            template=f"{EXTRACTION_PROMPTS.get('medical_conditions_prompt')} {{clinical_note}}"
+        ).format(clinical_note=clinical_note)
+
+        response = self.llm.predict(prompt)
+        result = self.output_parser.parse(response)
+
+        try:
+            return result.get("medical_conditions", "")
+        except Exception as e:
+            logger.error(f"Error parsing output: {e}")
+            raise

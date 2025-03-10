@@ -1,5 +1,5 @@
 import pytest
-from src.langgraph.states.patient_state import PatientState
+from src.agents.medical_conditions_agent.states.patient_state import PatientState
 
 @pytest.fixture
 def valid_patient_state():

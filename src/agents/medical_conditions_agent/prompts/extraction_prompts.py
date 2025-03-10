@@ -7,10 +7,8 @@ EXTRACTION_PROMPTS = {
         "age": "Age",
         "dob": "Date of birth",
         "insurance_number": "Insurance number"
-        Do not add additional markdown information.
 
         Clinical Note:
-
         """,
     "medical_conditions_prompt": """
         You are a specialized medical AI assistant. Extract all medical conditions and their associated codes from the following clinical note.
@@ -18,15 +16,8 @@ EXTRACTION_PROMPTS = {
         1. Identify the condition name
         2. Extract any associated code (ICD-10)
     
-        Format your response as a JSON array with objects having the following structure:
-        [
-            {
-                "condition": "condition name",
-                "code": "associated code (if available)",
-            }
-        ]
-        Do not add additional markdown information.
+        Format your response as a JSON with only an array called medical_conditions with objects having condition and code
 
-         Assessment/Plan section:
+        Assessment/Plan section:
         """,
 }

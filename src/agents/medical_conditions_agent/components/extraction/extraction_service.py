@@ -2,7 +2,8 @@ from typing import Any
 
 from src.agents.medical_conditions_agent.components.extraction.extractors import (
     RegexExtractor,
-    AIExtractor,
+    AIPatientInformationExtractor,
+    AIMedicalConditionsExtractor,
 )
 
 
@@ -26,8 +27,12 @@ class ExtractionService:
                 pattern=r"(?i)assessment\s*/?\s*plan:?\s*(.*)",
                 section_name="assessment_plan",
             ),
-            "patient_data": AIExtractor(prompt_key="patient_information_prompt"),
-            "medical_conditions": AIExtractor(prompt_key="medical_conditions_prompt"),
+            "patient_data": AIPatientInformationExtractor(
+                prompt_key="patient_information_prompt"
+            ),
+            "medical_conditions": AIMedicalConditionsExtractor(
+                prompt_key="medical_conditions_prompt"
+            ),
         }
 
     def extract(self, extractor_name: str, clinical_note: str) -> Any:
