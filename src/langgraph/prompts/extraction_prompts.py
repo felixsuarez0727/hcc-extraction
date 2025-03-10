@@ -1,17 +1,4 @@
-import os
-
-BASE_DIR = os.environ.get("APP_BASE_DIR", "app")
-
-# File paths
-DATABASE_FILE = os.path.join(BASE_DIR, "data", "reference", "hcc_relevant_codes.db")
-HCC_FILE = os.path.join(BASE_DIR, "data", "reference", "hcc_relevant_codes.csv")
-CREDENTIALS_FILE = os.path.join(BASE_DIR, "credentials.json")
-
-# Data paths
-INPUT_PATH = os.path.join(BASE_DIR, "data", "input")
-OUTPUT_PATH = os.path.join(BASE_DIR, "data", "output")
-
-PROMPTS = {
+EXTRACTION_PROMPTS = {
     "patient_information_prompt": """
         You are a specialized medical AI assistant. Extract the information from the provided clinical note.
        

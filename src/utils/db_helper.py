@@ -1,7 +1,7 @@
 import sqlite3
-from app.src.utils.constants import DATABASE_FILE
+from src.utils.constants import DATABASE_FILE
 from typing import List, Optional, Tuple
-from app.src.models.hcc import HCC
+from src.models.hcc import HCC
 
 
 DataType = List[Tuple[str, str, str]]

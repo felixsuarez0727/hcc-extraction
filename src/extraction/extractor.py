@@ -4,7 +4,7 @@ import time
 import re
 import os
 
-from app.src.utils.constants import PROMPTS
+from src.langgraph.prompts.extraction_prompts import EXTRACTION_PROMPTS
 from vertexai.generative_models import GenerativeModel
 
 logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ class MedicalAIExtractor:
         """Extract patient data from the clinical note using AI."""
         logger.info("Starting AI extraction for patient data.")
         time.sleep(0.3)
-        prompt = f"{PROMPTS.get('patient_information_prompt')} {clinical_note}"
+        prompt = f"{EXTRACTION_PROMPTS.get('patient_information_prompt')} {clinical_note}"
         logger.debug("Generated prompt for patient data extraction...")  
         response = self.model.generate_content(prompt)
         text_patient_information = response.text.strip()
@@ -58,7 +58,7 @@ class MedicalAIExtractor:
         """Extract medical conditions from the clinical note using AI."""
         logger.info("Starting AI extraction for medical conditions.")
         time.sleep(0.3)
-        prompt = f"{PROMPTS.get('medical_conditions_prompt')} {clinical_note}"
+        prompt = f"{EXTRACTION_PROMPTS.get('medical_conditions_prompt')} {clinical_note}"
         logger.debug("Generated prompt for medical conditions extraction...")  
         response = self.model.generate_content(prompt)
         conditions_text = response.text.strip()

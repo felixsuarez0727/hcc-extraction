@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from app.src.utils.constants import OUTPUT_PATH
+from src.utils.constants import OUTPUT_PATH
 
 
 def read_csv(file_path):

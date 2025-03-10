@@ -1,7 +1,7 @@
 import logging
-from app.src.extraction.extractor import MedicalAIExtractor
-from app.src.langgraph.states.patient_state import PatientState
-from app.src.utils.constants import CREDENTIALS_FILE
+from src.extraction.extractor import MedicalAIExtractor
+from src.langgraph.states.patient_state import PatientState
+from src.utils.constants import CREDENTIALS_FILE
 
 logger = logging.getLogger(__name__)
 

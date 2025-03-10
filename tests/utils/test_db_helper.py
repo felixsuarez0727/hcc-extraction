@@ -1,7 +1,7 @@
 import pytest
 from unittest import mock
-from app.src.models.hcc import HCC
-from app.src.utils.db_helper import insert_data, get_by_code
+from src.models.hcc import HCC
+from src.utils.db_helper import insert_data, get_by_code
 
 
 @pytest.fixture

@@ -12,4 +12,4 @@ COPY . .
 
 RUN poetry install 
 
-CMD ["poetry", "run", "python", "./app/main.py"]
+CMD ["poetry", "run", "python", "./src/main.py"]

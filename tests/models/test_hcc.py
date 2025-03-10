@@ -1,6 +1,6 @@
 import pytest
 from pydantic import ValidationError
-from app.src.models.hcc import HCC  
+from src.models.hcc import HCC  
 
 def test_hcc_creation_valid_data():
     """Test creating a valid instance of the HCC model"""

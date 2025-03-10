@@ -139,21 +139,20 @@ poetry run pytest
 
 ```
 ├── 📄 .gitignore                  # Files and directories ignored by Git
-├── 📁 app                         # Main application directory
+├── 📄 credentials.json            # Google Cloud credentials (do not include in repo)
+├── 📁 data                 	   # Input, output, and reference data
+│   ├── 📁 input            	   # Progress notes to process
+│   ├── 📁 output          		   # Processed results
+│   └── 📁 reference       	   	   # Reference data (HCC codes)
+├── 📁 src                         # Main application directory
 │   ├── 📄 agent.py                # AI agent and Vertex AI configuration
-│   ├── 📄 credentials.json        # Google Cloud credentials (do not include in repo)
-│   ├── 📁 data                    # Input, output, and reference data
-│   │   ├── 📁 input               # Progress notes to process
-│   │   ├── 📁 output              # Processed results
-│   │   └── 📁 reference           # Reference data (HCC codes)
 │   ├── 📄 main.py                 # Main entry point
-│   ├── 📁 src                     # Source code
-│   │   ├── 📁 evaluation          # HCC relevance evaluation
-│   │   ├── 📁 extraction          # Condition extraction
-│   │   ├── 📁 langgraph           # LangGraph implementation
-│   │   ├── 📁 models              # Models and data structures
-│   │   └── 📁 utils               # Utilities and tools
-│   └── 📁 tests                   # Unit tests
+|   ├── 📁 evaluation       	   # HCC relevance evaluation
+│   ├── 📁 extraction       	   # Condition extraction
+│   ├── 📁 langgraph        	   # LangGraph implementation
+│   ├── 📁 models           	   # Models and data structures
+│   └── 📁 utils            	   # Utilities and tools
+├── 📁 tests                 	   # Unit tests
 ├── 📄 docker-compose.yaml         # Docker Compose configuration
 ├── 📄 dockerfile                  # Docker container definition
 ├── 📄 langgraph.json              # LangGraph configuration

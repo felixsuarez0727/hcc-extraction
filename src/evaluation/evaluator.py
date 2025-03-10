@@ -1,6 +1,6 @@
 import os
 
-from app.src.utils.db_helper import get_by_code
+from src.utils.db_helper import get_by_code
 
 
 class MedicalAIEvaluator:

@@ -2,7 +2,7 @@ import pytest
 from unittest import mock
 
 
-from app.src.utils.io_helper import read_csv, read_txt, save_txt
+from src.utils.io_helper import read_csv, read_txt, save_txt
 
 OUTPUT_PATH = "/mock/output"
 
