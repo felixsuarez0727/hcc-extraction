@@ -5,14 +5,16 @@ from src.utils.io_helper import read_csv
 from src.utils.db_helper import create_database, insert_data
 from src.utils.logging_config import setup_logging
 
-from src.langgraph.states.patient_state import PatientState
 
-from src.langgraph.nodes.evaluation import (
+from src.agents.medical_conditions_agent.states.patient_state import PatientState
+
+from src.agents.medical_conditions_agent.nodes.evaluation import (
     evaluate_medical_conditions,
     save_patient_results,
 )
 
-from src.langgraph.nodes.extraction import (
+
+from src.agents.medical_conditions_agent.nodes.extraction import (
     extract_medical_conditions,
     extract_patient_information,
 )

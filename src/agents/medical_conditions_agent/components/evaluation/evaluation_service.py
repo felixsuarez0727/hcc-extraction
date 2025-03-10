@@ -1,6 +1,8 @@
 from typing import Any
 
-from src.evaluation.evaluators import HCCRelevanceEvaluator
+from src.agents.medical_conditions_agent.components.evaluation.evaluators import (
+    HCCRelevanceEvaluator,
+)
 
 
 class EvaluationService:

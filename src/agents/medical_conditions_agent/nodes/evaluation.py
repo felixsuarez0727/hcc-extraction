@@ -1,6 +1,11 @@
 import logging
-from src.evaluation.evaluation_service import EvaluationService
-from src.langgraph.states.patient_state import PatientState
+
+from src.agents.medical_conditions_agent.states.patient_state import PatientState
+from src.agents.medical_conditions_agent.components.evaluation.evaluation_service import (
+    EvaluationService,
+)
+
+
 from src.utils.io_helper import save_txt
 
 logger = logging.getLogger(__name__)

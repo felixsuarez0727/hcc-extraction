@@ -1,6 +1,9 @@
 from typing import Any
 
-from src.extraction.extractors import RegexExtractor, AIExtractor
+from src.agents.medical_conditions_agent.components.extraction.extractors import (
+    RegexExtractor,
+    AIExtractor,
+)
 
 
 class ExtractionService:

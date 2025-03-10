@@ -1,10 +1,10 @@
 import time
 import os
 
-from src.langgraph.states.patient_state import PatientState
+from src.agents.medical_conditions_agent.states.patient_state import PatientState
 from src.utils.constants import INPUT_PATH
 from src.utils.io_helper import read_txt
-from src.agent import graph
+from src.agents.medical_conditions_agent.medical_conditions_agent import graph
 
 
 def main():

@@ -5,7 +5,9 @@ import re
 from typing import Any
 
 from vertexai.generative_models import GenerativeModel
-from src.langgraph.prompts.extraction_prompts import EXTRACTION_PROMPTS
+from src.agents.medical_conditions_agent.prompts.extraction_prompts import (
+    EXTRACTION_PROMPTS,
+)
 
 logger = logging.getLogger(__name__)
 

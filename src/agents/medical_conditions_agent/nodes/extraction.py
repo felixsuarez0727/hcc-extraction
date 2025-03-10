@@ -1,6 +1,10 @@
 import logging
-from src.extraction.extraction_service import ExtractionService
-from src.langgraph.states.patient_state import PatientState
+
+from src.agents.medical_conditions_agent.states.patient_state import PatientState
+from src.agents.medical_conditions_agent.components.extraction.extraction_service import (
+    ExtractionService,
+)
+
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +28,6 @@ def extract_patient_information(state: PatientState) -> PatientState:
             "patient_data", extracted_patient_information
         )
         logger.info("Patient information processed successfully.")
-        
 
     except Exception as e:
         logger.error(f"Error while extracting patient information: {e}")
