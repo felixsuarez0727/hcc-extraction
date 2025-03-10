@@ -1,7 +1,6 @@
 import pytest
 from unittest import mock
 
-
 from src.utils.io_helper import read_csv, read_txt, save_txt
 
 OUTPUT_PATH = "/mock/output"
@@ -26,7 +25,7 @@ def mock_state():
             "dob": "1995-01-01",
             "insurance_number": "123456789",
         },
-        "medical_assessments": {
+        "medical_conditions": {
             "hcc_relevant": [{"condition": "Diabetes", "code": "E11.9"}],
             "hcc_not_relevant": [{"condition": "Asthma", "code": "J45"}],
         },

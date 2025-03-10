@@ -17,10 +17,8 @@ def main():
 
         initial_state = PatientState(
             patient_note=patient_note,
-            extracted_patient_data="",
-            extracted_medical_conditions="",
             patient_information={},
-            medical_assessments=[],
+            medical_conditions=[],
         )
 
         graph.invoke(initial_state)

@@ -1,5 +1,5 @@
 import logging
-from extraction.extraction_service import ExtractionService
+from src.extraction.extraction_service import ExtractionService
 from src.langgraph.states.patient_state import PatientState
 
 logger = logging.getLogger(__name__)
@@ -13,17 +13,18 @@ def extract_patient_information(state: PatientState) -> PatientState:
         logger.info("Extraction instance created successfully.")
 
         state["patient_note"] = state["patient_note"].replace('"', "").replace("'", "")
-        logger.debug(f"Patient note cleaned: {state['patient_note']}")
+        logger.debug("Patient note cleaned.")
 
-        state["extracted_patient_data"] = extraction_service.extract(
+        extracted_patient_information = extraction_service.extract(
             "patient_info", state["patient_note"]
         )
         logger.info("Patient data extracted successfully.")
 
-        state["extracted_medical_conditions"] = extraction_service.extract(
-            "assessment_plan", state["patient_note"]
+        state["patient_information"] = extraction_service.extract(
+            "patient_data", extracted_patient_information
         )
-        logger.info("Medical conditions (assessment plan) extracted successfully.")
+        logger.info("Patient information processed successfully.")
+        
 
     except Exception as e:
         logger.error(f"Error while extracting patient information: {e}")
@@ -39,15 +40,14 @@ def extract_medical_conditions(state: PatientState) -> PatientState:
         extraction_service = ExtractionService()
         logger.info("Extraction instance created successfully.")
 
-        state["patient_information"] = extraction_service.extract(
-            "patient_data", state["extracted_patient_data"]
+        extracted_medical_conditions = extraction_service.extract(
+            "assessment_plan", state["patient_note"]
         )
-        logger.info("Patient information processed successfully.")
+        logger.info("Medical conditions (assessment plan) extracted successfully.")
 
-        state["medical_assessments"] = extraction_service.extract(
-            "medical_conditions", state["extracted_medical_conditions"]
+        state["medical_conditions"] = extraction_service.extract(
+            "medical_conditions", extracted_medical_conditions
         )
-
         logger.info("Medical assessments processed successfully.")
 
     except Exception as e:

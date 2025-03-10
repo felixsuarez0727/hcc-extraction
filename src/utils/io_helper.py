@@ -22,7 +22,7 @@ def save_txt(state):
     """Save the extracted patient data and medical conditions to a text file."""
     
     patient_info = state["patient_information"]
-    medical_conditions = state["medical_assessments"]
+    medical_conditions = state["medical_conditions"]
     
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     

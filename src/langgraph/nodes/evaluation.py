@@ -17,13 +17,13 @@ def evaluate_medical_conditions(state: PatientState) -> PatientState:
         logger.info("Evaluation instance created successfully.")
 
         evaluated_medical_conditions = evaluation_service.evaluate(
-            "hcc_relevance", state["medical_assessments"]
+            "hcc_relevance", state["medical_conditions"]
         )
 
         logger.info("Medical conditions evaluated successfully.")
 
-        state["medical_assessments"] = evaluated_medical_conditions
-        logger.debug(f"Updated medical assessments: {state['medical_assessments']}")
+        state["medical_conditions"] = evaluated_medical_conditions
+        logger.debug(f"Updated medical assessments: {state['medical_conditions']}")
 
     except Exception as e:
         logger.error(f"Error while evaluating medical conditions: {e}")
