@@ -2,4 +2,6 @@ services:
   app:
     build: .
     volumes:
-      - ./app/data/output:/project/app/data/output
+      - ./data/output:/app/data/output
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json

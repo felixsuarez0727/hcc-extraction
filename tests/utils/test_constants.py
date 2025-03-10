@@ -4,7 +4,6 @@ from src.utils.constants import (
     BASE_DIR,
     DATABASE_FILE,
     HCC_FILE,
-    CREDENTIALS_FILE,
     INPUT_PATH,
     OUTPUT_PATH,
 )
@@ -27,14 +26,6 @@ def test_hcc_file():
     """Test that the HCC_FILE constant is set correctly."""
     expected_path = os.path.join("", "data", "reference", "hcc_relevant_codes.csv")
     assert HCC_FILE == expected_path, f"Expected {expected_path}, but got {HCC_FILE}"
-
-
-def test_credentials_file():
-    """Test that the CREDENTIALS_FILE constant is set correctly."""
-    expected_path = os.path.join("", "credentials.json")
-    assert CREDENTIALS_FILE == expected_path, (
-        f"Expected {expected_path}, but got {CREDENTIALS_FILE}"
-    )
 
 
 def test_input_path():

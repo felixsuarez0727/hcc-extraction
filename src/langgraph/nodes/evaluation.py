@@ -1,7 +1,6 @@
 import logging
 from src.evaluation.evaluator import MedicalAIEvaluator
 from src.langgraph.states.patient_state import PatientState
-from src.utils.constants import CREDENTIALS_FILE
 from src.utils.io_helper import save_txt
 
 logger = logging.getLogger(__name__)
@@ -13,7 +12,7 @@ def evaluate_medical_conditions(state: PatientState) -> PatientState:
     logger.info("Starting evaluation of medical conditions.")
 
     try:
-        evaluator = MedicalAIEvaluator(service_account_path=CREDENTIALS_FILE)
+        evaluator = MedicalAIEvaluator()
         logger.info("MedicalAIEvaluator instance created successfully.")
 
         evaluated_medical_conditions = evaluator.evaluate_hcc_relevance(

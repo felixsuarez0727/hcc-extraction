@@ -16,11 +16,11 @@ The project follows a layered architecture that clearly separates:
 
 ### Main components:
 
-- `app/main.py`: Main entry point of the application
-- `app/agent.py`: Defines the agent configuration
-- `app/src/extraction/extractor.py`: Handles condition extraction from notes
-- `app/src/evaluation/evaluator.py`: Evaluates the HCC relevance of extracted conditions
-- `app/src/utils/`: Contains utilities for data handling, logging, and constants
+- `src/main.py`: Main entry point of the application
+- `src/agent.py`: Defines the agent configuration
+- `src/extraction/extractor.py`: Handles condition extraction from notes
+- `src/evaluation/evaluator.py`: Evaluates the HCC relevance of extracted conditions
+- `src/utils/`: Contains utilities for data handling, logging, and constants
 
 ## Prerequisites
 - Poetry for development (optional)
@@ -36,7 +36,73 @@ To access Vertex AI Gemini 1.5 Flash, you need to configure a credentials file:
 
 1. Create a service account in Google Cloud Console with access to Vertex AI
 2. Generate and download a JSON key file for the service account
-3. Place the credentials file in `app/credentials.json`
+3. Place the credentials file in project root `credentials.json`
+
+#### Set Required Google Cloud Credentials Environment Variable on Windows
+
+Follow these steps:
+
+1. Open the Control Panel.
+
+2. Search for Environment Variables.
+
+3. Click the Edit Environment Variables button.
+
+4. In the System variables section, click New.
+
+5. In the Variable name field, enter GOOGLE_APPLICATION_CREDENTIALS.
+
+6. In the Variable value field, enter the full path to your credentials file, for example:
+
+	``` bash
+	C:\path\to\your\credentials.json
+	```
+
+7. Click OK and close the settings windows.
+
+8. Verify the Environment Variable is Set Correctly
+
+	Powershell
+	``` bash
+	$env:GOOGLE_APPLICATION_CREDENTIALS
+	```
+
+	CMD
+	``` bash
+	echo %GOOGLE_APPLICATION_CREDENTIALS%
+	```
+
+#### Set Required Google Cloud Credentials Environment Variable on  Linux
+
+Follow these steps:
+
+1. Open your terminal.
+
+2. Edit your shell's profile configuration file:
+
+
+	```
+	nano ~/.bashrc
+	```
+
+	Add the following configuration
+
+	```
+	export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
+	```
+
+3. Save the file and exit the editor (in nano, press Ctrl + X, then press Y, and then Enter).
+
+4. Reload the profile to apply the changes:
+
+	```
+	source ~/.bashrc
+	```
+
+5. Verify the Environment Variable is Set Correctly
+	```
+	echo $GOOGLE_APPLICATION_CREDENTIALS
+	```
 
 ## Installation and Execution
 
@@ -48,12 +114,12 @@ To access Vertex AI Gemini 1.5 Flash, you need to configure a credentials file:
 docker-compose up --build
 ```
 
-This will automatically process all progress notes in `app/data/input/` and save the results in `app/data/output/`.
+This will automatically process all progress notes in `data/input/` and save the results in `data/output/`.
 
 2. To access the processed results:
 
 ```bash
-ls -la app/data/output/
+ls -la data/output/
 ```
 
 ### Manual Installation (development)
@@ -72,16 +138,16 @@ poetry install
 
 ```bash
 # Using Poetry
-poetry run python app/main.py
+poetry run python ./src/main.py
 ```
 
 ## Usage
 
 ### Processing Progress Notes
 
-1. Place clinical progress notes in text format in the `app/data/input/` directory
+1. Place clinical progress notes in text format in the `data/input/` directory
 2. Run the application following the instructions above
-3. Review the processed results in `app/data/output/`
+3. Review the processed results in `data/output/`
 
 ### Input/Output Format
 

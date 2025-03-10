@@ -6,7 +6,7 @@ RUN pip install "poetry==$POETRY_VERSION"
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 ENV PATH="/app/.venv/bin:$PATH"
 
-WORKDIR /project
+WORKDIR /app
 
 COPY . .
 

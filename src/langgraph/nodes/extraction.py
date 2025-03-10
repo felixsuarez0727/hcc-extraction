@@ -1,7 +1,6 @@
 import logging
 from src.extraction.extractor import MedicalAIExtractor
 from src.langgraph.states.patient_state import PatientState
-from src.utils.constants import CREDENTIALS_FILE
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +9,7 @@ def extract_patient_information(state: PatientState) -> PatientState:
     logger.info("Starting patient information extraction.")
 
     try:
-        extractor = MedicalAIExtractor(service_account_path=CREDENTIALS_FILE)
+        extractor = MedicalAIExtractor()
         logger.info("MedicalAIExtractor instance created successfully.")
 
         state["patient_note"] = state["patient_note"].replace('"', "").replace("'", "")
@@ -37,7 +36,7 @@ def extract_medical_conditions(state: PatientState) -> PatientState:
     logger.info("Starting medical conditions extraction.")
 
     try:
-        extractor = MedicalAIExtractor(service_account_path=CREDENTIALS_FILE)
+        extractor = MedicalAIExtractor()
         logger.info("MedicalAIExtractor instance created successfully.")
 
         state["patient_information"] = extractor.patient_data_ai_extraction(

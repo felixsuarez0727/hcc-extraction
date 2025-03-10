@@ -9,10 +9,11 @@ from vertexai.generative_models import GenerativeModel
 
 logger = logging.getLogger(__name__)
 
+
 class MedicalAIExtractor:
-    def __init__(self, service_account_path: str):
+    def __init__(self):
         logger.info("Initializing MedicalAIExtractor.")
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = service_account_path
+
         self.model = GenerativeModel(model_name="gemini-1.5-flash")
         logger.info("MedicalAIExtractor initialized successfully.")
 
@@ -43,8 +44,10 @@ class MedicalAIExtractor:
         """Extract patient data from the clinical note using AI."""
         logger.info("Starting AI extraction for patient data.")
         time.sleep(0.3)
-        prompt = f"{EXTRACTION_PROMPTS.get('patient_information_prompt')} {clinical_note}"
-        logger.debug("Generated prompt for patient data extraction...")  
+        prompt = (
+            f"{EXTRACTION_PROMPTS.get('patient_information_prompt')} {clinical_note}"
+        )
+        logger.debug("Generated prompt for patient data extraction...")
         response = self.model.generate_content(prompt)
         text_patient_information = response.text.strip()
         logger.info("Patient data AI extraction completed.")
@@ -58,8 +61,10 @@ class MedicalAIExtractor:
         """Extract medical conditions from the clinical note using AI."""
         logger.info("Starting AI extraction for medical conditions.")
         time.sleep(0.3)
-        prompt = f"{EXTRACTION_PROMPTS.get('medical_conditions_prompt')} {clinical_note}"
-        logger.debug("Generated prompt for medical conditions extraction...")  
+        prompt = (
+            f"{EXTRACTION_PROMPTS.get('medical_conditions_prompt')} {clinical_note}"
+        )
+        logger.debug("Generated prompt for medical conditions extraction...")
         response = self.model.generate_content(prompt)
         conditions_text = response.text.strip()
         logger.info("Medical conditions AI extraction completed.")
