@@ -1,5 +1,5 @@
 import logging
-from src.evaluation.evaluator import MedicalAIEvaluator
+from src.evaluation.evaluation_service import EvaluationService
 from src.langgraph.states.patient_state import PatientState
 from src.utils.io_helper import save_txt
 
@@ -12,12 +12,14 @@ def evaluate_medical_conditions(state: PatientState) -> PatientState:
     logger.info("Starting evaluation of medical conditions.")
 
     try:
-        evaluator = MedicalAIEvaluator()
-        logger.info("MedicalAIEvaluator instance created successfully.")
+        evaluation_service = EvaluationService()
 
-        evaluated_medical_conditions = evaluator.evaluate_hcc_relevance(
-            state["medical_assessments"]
+        logger.info("Evaluation instance created successfully.")
+
+        evaluated_medical_conditions = evaluation_service.evaluate(
+            "hcc_relevance", state["medical_assessments"]
         )
+
         logger.info("Medical conditions evaluated successfully.")
 
         state["medical_assessments"] = evaluated_medical_conditions
